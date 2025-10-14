@@ -9,6 +9,9 @@ pipeline {
                     reuseNode true
                 }
             }
+            environment {
+                NPM_CONFIG_CACHE = "${WORKSPACE}/.npm-cache"
+            }
             steps {
                 //cleanWs()
                 sh '''

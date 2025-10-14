@@ -20,10 +20,7 @@ pipeline {
                     echo "===== Environment Info ====="
                     node --version
                     npm --version
-
-                    echo "===== Cleaning npm cache ====="
-                    npm cache clean --force
-
+                    
                     echo "===== Installing dependencies ====="
                     npm ci
 

@@ -10,13 +10,24 @@ pipeline {
                 }
             }
             steps {
-                //cleanWs()
+                // Clean workspace before running npm
+                cleanWs()
+
                 sh '''
-                    ls -la
+                    echo "===== Environment Info ====="
                     node --version
                     npm --version
+
+                    echo "===== Cleaning npm cache ====="
+                    npm cache clean --force
+
+                    echo "===== Installing dependencies ====="
                     npm ci
+
+                    echo "===== Building project ====="
                     npm run build
+
+                    echo "===== Listing build output ====="
                     ls -la
                 '''
             }

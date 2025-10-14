@@ -13,21 +13,12 @@ pipeline {
                 NPM_CONFIG_CACHE = "${WORKSPACE}/.npm-cache"
             }
             steps {
-                // Clean workspace before running npm
-                cleanWs()
-
                 sh '''
-                    echo "===== Environment Info ====="
+                    ls -la
                     node --version
                     npm --version
-                    
-                    echo "===== Installing dependencies ====="
                     npm ci
-
-                    echo "===== Building project ====="
                     npm run build
-
-                    echo "===== Listing build output ====="
                     ls -la
                 '''
             }

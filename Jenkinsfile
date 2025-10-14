@@ -23,5 +23,17 @@ pipeline {
                 '''
             }
         }
+
+        stage('Test') {
+            
+            environment {
+                NPM_CONFIG_CACHE = "${WORKSPACE}/.npm-cache"
+            }
+            steps {
+                sh '''
+                    test -f build/index.html
+                '''
+            }
+        }
     }
 }

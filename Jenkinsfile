@@ -10,8 +10,9 @@ pipeline {
                 }
             }
             steps {
+                cleanWs()
                 sh '''
-                    ls -la
+                       ls -la
                     node --version
                     npm --version
                     npm ci

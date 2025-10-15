@@ -52,10 +52,10 @@ pipeline {
                     reuseNode true
                 }
             }
-            //originally (serve -s build) we try to install serve as global dependency, but instead of global we just use local dependency
+            //originally (npm install -g serve, serve -s build) we try to install serve as global dependency, but instead of global we just use local dependency
             steps {
                 sh '''
-                    npm install -g serve
+                    npm install serve
                     node_modules/.bin/serve -s build
                     npx playwright test
                 '''

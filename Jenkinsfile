@@ -2,6 +2,7 @@ pipeline {
     agent any
 
     stages {
+        // This is a comment
         stage('Build') {
             agent {
                 docker {
@@ -33,6 +34,8 @@ pipeline {
             //environment {
                 //NPM_CONFIG_CACHE = "${WORKSPACE}/.npm-cache"
             //}
+
+            // To comment out sh command # should be in front of a command like this #test -f build/index.html
             steps {
                 sh '''
                     test -f build/index.html

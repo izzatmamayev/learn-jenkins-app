@@ -25,10 +25,15 @@ pipeline {
         }
 
         stage('Test') {
-            
-            environment {
-                NPM_CONFIG_CACHE = "${WORKSPACE}/.npm-cache"
+            agent {
+                docker {
+                    image 'node:18-alpine'
+                    reuseNode true
+                }
             }
+            //environment {
+                //NPM_CONFIG_CACHE = "${WORKSPACE}/.npm-cache"
+            //}
             steps {
                 sh '''
                     test -f build/index.html

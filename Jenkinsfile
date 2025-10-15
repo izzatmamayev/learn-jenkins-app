@@ -25,48 +25,51 @@ pipeline {
                 '''
             }
         }
-        stage('Test') {
-            agent {
-                docker {
-                    image 'node:18-alpine'
-                    reuseNode true
-                }
-            }
-            //environment {
-                //NPM_CONFIG_CACHE = "${WORKSPACE}/.npm-cache"
-            //}
 
-            // To comment out sh command # should be in front of a command like this #test -f build/index.html
-            steps {
-                sh '''
-                    test -f build/index.html
-                    npm test
-                '''
-            }
-        }
-
-        stage('E2E') {
-            agent {
-                docker {
-                    image 'mcr.microsoft.com/playwright:v1.39.0-jammy'
-                    reuseNode true
+        stage('Run Tests') {
+            parallel {
+                stage('Test') {
+                    agent {
+                        docker {
+                            image 'node:18-alpine'
+                            reuseNode true
+                        }
+                    }
+                    //environment {
+                        //NPM_CONFIG_CACHE = "${WORKSPACE}/.npm-cache"
+                    //}
+                    // To comment out sh command # should be in front of a command like this #test -f build/index.html
+                    steps {
+                        sh '''
+                            test -f build/index.html
+                            npm test
+                        '''
+                    }
                 }
-            }
-             environment {
-                NPM_CONFIG_CACHE = "${WORKSPACE}/.npm-cache"
-            }
-            //originally (npm install -g serve, serve -s build) we try to install serve as global dependency, but instead of global we just use local dependency
-            steps {
-                sh '''
-                    npm install serve
-                    node_modules/.bin/serve -s build &
-                    sleep 10
-                    npx playwright test --reporter=html
-                '''
+        
+                stage('E2E') {
+                    agent {
+                        docker {
+                            image 'mcr.microsoft.com/playwright:v1.39.0-jammy'
+                            reuseNode true
+                        }
+                    }
+                     environment {
+                        NPM_CONFIG_CACHE = "${WORKSPACE}/.npm-cache"
+                    }
+                    //originally (npm install -g serve, serve -s build) we try to install serve as global dependency, but instead of global we just use local dependency
+                    steps {
+                        sh '''
+                            npm install serve
+                            node_modules/.bin/serve -s build &
+                            sleep 10
+                            npx playwright test --reporter=html
+                        '''
+                    }
+                }
             }
         }
     }
-
     post {
         always {
             junit 'jest-results/junit.xml'

@@ -52,14 +52,14 @@ pipeline {
                     reuseNode true
                 }
             }
-            environment {
-                NPM_CONFIG_NODE_MODULES = "${WORKSPACE}/.node_modules"
+             environment {
+                NPM_CONFIG_CACHE = "${WORKSPACE}/.npm-cache"
             }
             //originally (npm install -g serve, serve -s build) we try to install serve as global dependency, but instead of global we just use local dependency
             steps {
                 sh '''
-                    npm install -g serve
-                    serve -s build
+                    npm install serve
+                    node_modules/.bin/serve -s build
                     npx playwright test
                 '''
             }

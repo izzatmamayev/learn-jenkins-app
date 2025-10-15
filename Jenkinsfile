@@ -8,6 +8,7 @@ pipeline {
                 docker {
                     image 'node:18-alpine'
                     reuseNode true
+                    //arg '-u root:root'   //this is how we can specify different user, but don not user root user, that is not not a good practice
                 }
             }
             environment {

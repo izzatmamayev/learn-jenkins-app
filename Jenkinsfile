@@ -87,9 +87,6 @@ pipeline {
                     reuseNode true
                 }
             }
-            environment {
-                NPM_CONFIG_CACHE = "${WORKSPACE}/.npm-cache"
-            }
             steps {
                 sh '''
                     npm install netlify-cli@17.10.1

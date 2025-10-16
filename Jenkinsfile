@@ -88,11 +88,11 @@ pipeline {
                 }
             }
             environment {
-                        NPM_CONFIG_CACHE = "${WORKSPACE}/.npm"
+                        NPM_CONFIG_CACHE = "${WORKSPACE}/.npm_cache"
                     }
             steps {
                 sh '''
-                    npm install netlify-cli@17.10.1
+                    npm install netlify-cli@17.10.1 -unsafe-perm
                     node_modules/.bin/netlify --version
                 '''
             }

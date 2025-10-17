@@ -91,13 +91,17 @@ pipeline {
             }
             environment {
                 NPM_CONFIG_CACHE = "${WORKSPACE}/.npm-cache"
-                NETLIFY_HOME = "${WORKSPACE}/.netlify"
+                //NETLIFY_HOME = "${WORKSPACE}/.netlify"
             }
             steps {    
                 sh '''
                     npm install netlify-cli@23.9.1 --unsafe-perm
-                    NETLIFY_HOME=$NETLIFY_HOME node_modules/.bin/netlify --version
+                    node_modules/.bin/netlify --version
                 '''
+                //sh '''
+                 //   npm install netlify-cli@23.9.1 --unsafe-perm
+                //    NETLIFY_HOME=$NETLIFY_HOME node_modules/.bin/netlify --version
+               // '''
             }
         }
     }

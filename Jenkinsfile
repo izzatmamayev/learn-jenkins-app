@@ -89,16 +89,20 @@ pipeline {
                     reuseNode true
                 }
             }
-            environment {
-                NPM_CONFIG_CACHE = "${WORKSPACE}/.npm-cache"
-                NETLIFY_HOME = "${WORKSPACE}/.netlify"
-            }
+           // environment {
+            //    NPM_CONFIG_CACHE = "${WORKSPACE}/.npm-cache"
+            //    NETLIFY_HOME = "${WORKSPACE}/.netlify"
+           // }
             steps {    
                 sh '''
-                    mkdir -p $NETLIFY_HOME
-                    npm install netlify-cli@23.9.1 --unsafe-perm
-                    NETLIFY_HOME=$NETLIFY_HOME node_modules/.bin/netlify --version
+                    npm install netlify-cli@23.9.1 -g
+                    netlify --version
                 '''
+                //sh '''
+                  //  mkdir -p $NETLIFY_HOME
+                  //  npm install netlify-cli@23.9.1 --unsafe-perm
+                  //  NETLIFY_HOME=$NETLIFY_HOME node_modules/.bin/netlify --version
+                //'''
             }
         }
     }

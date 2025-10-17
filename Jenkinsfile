@@ -89,11 +89,11 @@ pipeline {
                     reuseNode true
                 }
             }
-            //environment {
-                //NPM_CONFIG_CACHE = "${WORKSPACE}/.npm-cache"
-                //NETLIFY_HOME = "${WORKSPACE}/.netlify"
-            //}
-            steps {    
+            environment {
+                NPM_CONFIG_CACHE = "${WORKSPACE}/.npm-cache"
+                NETLIFY_HOME = "${WORKSPACE}/.netlify"
+            }
+            steps {
                 sh '''
                     npm install -g netlify-cli
                     netlify --version

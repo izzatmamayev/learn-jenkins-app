@@ -85,20 +85,24 @@ pipeline {
             agent {
                 docker {
                     image 'node:20-alpine'
-                    args "-v /etc/passwd:/etc/passwd"
+                    //args "-v /etc/passwd:/etc/passwd"
                     reuseNode true
                 }
             }
             environment {
-                NPM_CONFIG_CACHE = "${WORKSPACE}/.npm-cache"
-                NETLIFY_HOME = "${WORKSPACE}/.netlify"
+                //NPM_CONFIG_CACHE = "${WORKSPACE}/.npm-cache"
+                //NETLIFY_HOME = "${WORKSPACE}/.netlify"
             }
             steps {    
                 sh '''
-                    export NETLIFY_HOME=$WORKSPACE/.netlify
-                    npm install netlify-cli@23.9.1 unsafe-perm=true --allow-root
-                    node_modules/.bin/netlify --version
+                    npm install -g netlify-cli
+                    netlify --version
                 '''
+                //sh '''
+                //    export NETLIFY_HOME=$WORKSPACE/.netlify
+                //    npm install netlify-cli@23.9.1 unsafe-perm=true --allow-root
+                //    node_modules/.bin/netlify --version
+                // '''
                 //sh '''
                  //   npm install netlify-cli@23.9.1 --unsafe-perm
                 //    NETLIFY_HOME=$NETLIFY_HOME node_modules/.bin/netlify --version

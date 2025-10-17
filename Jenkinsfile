@@ -95,6 +95,7 @@ pipeline {
             }
             steps {    
                 sh '''
+                    export NETLIFY_HOME=$WORKSPACE/.netlify
                     npm install netlify-cli@23.9.1 --unsafe-perm
                     node_modules/.bin/netlify --version
                 '''

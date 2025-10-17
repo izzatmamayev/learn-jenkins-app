@@ -87,10 +87,9 @@ pipeline {
                     reuseNode true
                 }
             }
-            environment {
-                    HOME = '/home/ec2-user'
-                    USER = 'ec2-user'
-            }
+            //environment {
+            //    NPM_CONFIG_CACHE = "${WORKSPACE}/.npm-cache"
+            //}
             steps {
                 sh '''
                     npm install netlify-cli

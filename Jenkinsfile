@@ -84,6 +84,7 @@ pipeline {
             agent {
                 docker {
                     image 'node:20-alpine'
+                    args "-v /etc/passwd:/etc/passwd"
                     reuseNode true
                 }
             }

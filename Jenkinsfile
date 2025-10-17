@@ -83,7 +83,7 @@ pipeline {
         stage('Deploy') {
             agent {
                 docker {
-                    image 'node:20-alpine'
+                    image 'node:23-alpine'
                     reuseNode true
                 }
             }
@@ -92,7 +92,7 @@ pipeline {
             }
             steps {
                 sh '''
-                    npm install netlify-cli@20.1.1
+                    npm install netlify-cli
                     node_modules/.bin/netlify --version
                 '''
             }

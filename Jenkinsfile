@@ -92,6 +92,7 @@ pipeline {
             //}
             steps {
                 sh '''
+                    sudo chown -R 992:992 "/.npm"
                     npm install netlify-cli
                     node_modules/.bin/netlify --version
                 '''

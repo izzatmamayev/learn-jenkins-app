@@ -90,15 +90,15 @@ pipeline {
                 }
             }
             environment {
+                HOME = "${WORKSPACE}"
                 NPM_CONFIG_CACHE = "${WORKSPACE}/.npm-cache"
                 NETLIFY_HOME = "${WORKSPACE}/.netlify"
             }
             steps {
                 sh '''
-                    export NETLIFY_HOME=$WORKSPACE/.netlify
                     npm install netlify-cli@23.9.1
                     node_modules/.bin/netlify --version
-                 '''
+                '''
             }
         }
     }

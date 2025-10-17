@@ -87,12 +87,11 @@ pipeline {
                     reuseNode true
                 }
             }
-            //environment {
-            //    NPM_CONFIG_CACHE = "${WORKSPACE}/.npm-cache"
-            //}
+            environment {
+                NPM_CONFIG_CACHE = "${WORKSPACE}/.npm-cache"
+            }
             steps {
                 sh '''
-                    sudo chown -R 992:992 "/.npm"
                     npm install netlify-cli
                     node_modules/.bin/netlify --version
                 '''

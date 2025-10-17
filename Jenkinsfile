@@ -91,8 +91,10 @@ pipeline {
                 NPM_CONFIG_CACHE = "${WORKSPACE}/.npm-cache"
             }
             steps {
-                sh '''
-                    npm install netlify-cli
+                sh ''' 
+                    apk add --no-cache vips-dev build-base python3
+                    npm config set cache $NPM_CONFIG_CACHE
+                    npm install netlify-cli@23.9.1 --unsafe-perm
                     node_modules/.bin/netlify --version
                 '''
             }

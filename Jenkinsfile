@@ -91,7 +91,7 @@ pipeline {
             }
             environment {
                 NPM_CONFIG_CACHE = "${WORKSPACE}/.npm-cache"
-                //NETLIFY_HOME = "${WORKSPACE}/.netlify"
+                NETLIFY_HOME = "${WORKSPACE}/.netlify"
             }
             steps {    
                 sh '''

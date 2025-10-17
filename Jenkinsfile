@@ -92,7 +92,6 @@ pipeline {
             }
             steps {
                 sh ''' 
-                    npm config set cache $NPM_CONFIG_CACHE
                     npm install netlify-cli@23.9.1 --unsafe-perm
                     node_modules/.bin/netlify --version
                 '''

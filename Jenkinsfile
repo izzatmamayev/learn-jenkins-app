@@ -88,8 +88,9 @@ pipeline {
                 }
             }
             environment {
-                        NPM_CONFIG_CACHE = "${WORKSPACE}/.npm_cache"
-                    }
+                    HOME = '/home/ec2-user'
+                    USER = 'ec2-user'
+            }
             steps {
                 sh '''
                     npm install netlify-cli

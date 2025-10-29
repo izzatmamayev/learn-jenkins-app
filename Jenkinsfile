@@ -112,6 +112,9 @@ pipeline {
         }
         
         stage('Prod E2E') {
+            environment {
+                CI_ENVIRONMENT_URL = 'https://starlit-meringue-44391a.netlify.app'
+            }
             agent {
                 docker {
                     image 'mcr.microsoft.com/playwright:v1.39.0-jammy'

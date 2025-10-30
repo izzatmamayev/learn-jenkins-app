@@ -87,7 +87,31 @@ pipeline {
             }
         }
 
-        stage('Deploy') {
+        stage('Deploy staging') {
+            agent {
+                docker {
+                    image 'node:20-alpine'
+                    args "-v /etc/passwd:/etc/passwd"
+                    reuseNode true
+                }
+            }
+            environment {
+                HOME = "${WORKSPACE}"
+                NPM_CONFIG_CACHE = "${WORKSPACE}/.npm-cache"
+                NETLIFY_HOME = "${WORKSPACE}/.netlify"
+            }
+            steps {
+                sh '''
+                    npm install netlify-cli@23.9.1
+                    node_modules/.bin/netlify --version
+                    echo "Deploying to production. Site ID: $NETLIFY_SITE_ID"
+                    node_modules/.bin/netlify status
+                    node_modules/.bin/netlify deploy --no-build --dir=build
+                '''
+            }
+        }
+
+        stage('Deploy production') {
             agent {
                 docker {
                     image 'node:20-alpine'

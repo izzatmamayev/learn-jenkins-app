@@ -96,6 +96,7 @@ pipeline {
                 }
             }
             environment {
+                NETLIFY_SITE_ID='5ea453ba-ad1a-4966-a1c9-9c26d8f5ac18'
                 HOME = "${WORKSPACE}"
                 NPM_CONFIG_CACHE = "${WORKSPACE}/.npm-cache"
                 NETLIFY_HOME = "${WORKSPACE}/.netlify"

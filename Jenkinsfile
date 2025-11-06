@@ -7,7 +7,7 @@ pipeline {
     }
 
     stages {
-        // This is a comment
+        // This is a comment from Jenkinsfile
         stage('Build') {
             agent {
                 docker {
